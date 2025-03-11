@@ -3,6 +3,7 @@ import PropsPassing from "./components/PropsPassing";
 import Input from "./components/Input";
 import Counter from "./components/Counter";
 import UserList from "./components/UserList";
+import UserPhoto from "./components/UserPhoto";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -15,7 +16,8 @@ function App() {
         <Counter count={count} setCount={setCount} />
         <Counter count={count} setCount={setCount} /> */}
         <h1>Welcome to User Directory</h1>
-        <UserList />
+        {/* <UserList /> */}
+        <UserPhoto />
       </div>
     </div>
   );
