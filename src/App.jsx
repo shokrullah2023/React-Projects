@@ -4,6 +4,7 @@ import Input from "./components/Input";
 import Counter from "./components/Counter";
 import UserList from "./components/UserList";
 import UserForm from "./components/UserForm";
+import UserPhoto from "./components/UserPhoto";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -18,6 +19,8 @@ function App() {
         <h1>Welcome to User Directory</h1>
         <UserList />
         <UserForm />
+        {/* <UserList /> */}
+        <UserPhoto />
       </div>
     </div>
   );
