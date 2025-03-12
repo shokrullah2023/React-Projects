@@ -30,7 +30,6 @@ function UserForm() {
 
     const idToDelete = parseInt(deleteId);
     const userExists = users.find((user) => user.id === idToDelete);
-    const userMessage = "User Doesn't exist";
 
     if (!userExists) {
       alert("User with the given id does not exist");
@@ -39,9 +38,10 @@ function UserForm() {
 
     const confirmDelete = window.confirm(
       `Are you sure you want to delete user ${
-        userExists.id ? userExists.name : userMessage
+        userExists.id ? userExists.name : "User doesn't exist"
       }`
     );
+
     if (!confirmDelete) {
       return;
     }

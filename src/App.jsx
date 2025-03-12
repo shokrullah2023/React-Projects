@@ -17,8 +17,8 @@ function App() {
         <Counter count={count} setCount={setCount} />
         <Counter count={count} setCount={setCount} /> */}
         <h1>Welcome to User Directory</h1>
-        <UserList />
-        <UserForm />
+        {/* <UserList />
+        <UserForm /> */}
         {/* <UserList /> */}
         <UserPhoto />
       </div>
