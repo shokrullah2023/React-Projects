@@ -166,9 +166,26 @@ export default function UsersForm(){
         newErrors.email = "Email must contain @ and .com";
       if(formData.age <= 0 || formData.age === "")
         newErrors.age = "Enter a valid age";
-      if(!formData.gender) newErrors.gender = "Select your gender"
-      
+      if(!formData.gender) newErrors.gender = "Select your gender";
+      if(!formData.termsAccepted) newErrors.termsAccepted = "Please accept terms and conditions";
+
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
     }
 
+    // Handle Form Submission
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if(validateForm()){
+        alert("Registration successful! \n" + JSON.stringify(formData, null, 2));
+        setFormData({name: "", email:"", age:"", gender:"", termsAccepted: false});
+        setErrors({});
+      }
+    }
 
+    return (
+      <div>
+
+      </div>
+    )
 }
