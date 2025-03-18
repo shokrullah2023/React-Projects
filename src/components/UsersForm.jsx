@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 // export default function UserForm() {
 //   const [formData, setFormData] = useState({
@@ -137,55 +137,113 @@ import { useState } from "react";
 //   );
 // }
 
-export default function UsersForm(){
+import { useEffect, useState } from "react";
+import ReusableInputField from "./ReusableInputField";
+
+
+export default function RegistrationForm() {
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     age: "",
     gender: "",
-    termsAccepted: false
-    })
+    termsAccepted: false,
+  });
 
-    const [error, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
 
-    // Handle Input Change
-    const handleChange = (e) => {
-      const {name, type, value, checked} = e.target;
-      setFormData({
-        ...formData,
-        [name]: type === "checkbox" ? checked : value
-      })
+  // Load data from localStorage on component mount
+  useEffect(()=> {
+    const savedData = JSON.parse(localStorage.getItem("userformData"));
+    if (savedData) setFormData(savedData);
+  }, []);
+
+  // Save data to localStorage when formData changes
+  useEffect(() => {
+    localStorage.setItem("useFormData", JSON.stringify(formData));
+  }, [formData]);
+
+  // Handle Input Changes
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+ // Form Validation
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (formData.name.length < 3) newErrors.name = "Name must be at least 3 characters.";
+    if (!formData.email.includes("@") || !formData.email.includes(".com"))
+      newErrors.email = "Invalid email format.";
+    if (formData.age <= 0 || formData.age === "") newErrors.age = "Enter a valid age.";
+    if (!formData.gender) newErrors.gender = "Select your gender.";
+    if (!formData.termsAccepted) newErrors.termsAccepted = "You must accept the terms.";
+
+    setErrors(newErrors);
+    setIsFormValid(Object.keys(newErrors).length === 0);
+  };
+
+  // Handle Form Submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    validateForm();
+    if (isFormValid) {
+      alert("Registration Successful! 🎉\n" + JSON.stringify(formData, null, 2));
+      setFormData({ name: "", email: "", age: "", gender: "", termsAccepted: false }); // Reset form
+      setErrors({});
+      localStorage.removeItem("useFormData"); // Clear localStorage
     }
+  };
 
-    // Form Validation
-    const validateForm = () => {
-      let newErrors = {};
-      if(formData.name.length < 3)
-        newErrors.name = "Name must be at least 3 characters";
-      if(!formData.email.includes("@") || !formData.email.includes(".com"))
-        newErrors.email = "Email must contain @ and .com";
-      if(formData.age <= 0 || formData.age === "")
-        newErrors.age = "Enter a valid age";
-      if(!formData.gender) newErrors.gender = "Select your gender";
-      if(!formData.termsAccepted) newErrors.termsAccepted = "Please accept terms and conditions";
+  return (
+    <div className="max-w-md mx-auto mt-10 p-6 bg-blue shadow-lg rounded-lg">
+      <h2 className="text-2xl font-bold mb-4">User Registration</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Reusable InputField Components */}
+        <ReusableInputField type="text" name="name" value={formData.name} onChange={handleChange} label="Name" />
+        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
 
-      setErrors(newErrors);
-      return Object.keys(newErrors).length === 0;
-    }
+        <ReusableInputField type="email" name="email" value={formData.email} onChange={handleChange} label="Email" />
+        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
-    // Handle Form Submission
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if(validateForm()){
-        alert("Registration successful! \n" + JSON.stringify(formData, null, 2));
-        setFormData({name: "", email:"", age:"", gender:"", termsAccepted: false});
-        setErrors({});
-      }
-    }
+        <ReusableInputField type="number" name="age" value={formData.age} onChange={handleChange} label="Age" />
+        {errors.age && <p className="text-red-500 text-sm">{errors.age}</p>}
 
-    return (
-      <div>
+        <ReusableInputField
+          type="radio"
+          name="gender"
+          value={formData.gender}
+          onChange={handleChange}
+          label="Gender"
+          options={["Male", "Female"]}
+        />
+        {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
 
-      </div>
-    )
+        <ReusableInputField
+          type="checkbox"
+          name="termsAccepted"
+          checked={formData.termsAccepted}
+          onChange={handleChange}
+          label="I accept the terms & conditions"
+        />
+        {errors.termsAccepted && <p className="text-red-500 text-sm">{errors.termsAccepted}</p>}
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+          disabled={!isFormValid}  // Disable button if form is not valid
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  );
 }
+
