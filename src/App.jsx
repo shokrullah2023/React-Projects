@@ -4,7 +4,8 @@ import Input from "./components/Input";
 import Counter from "./components/Counter";
 import UserList from "./components/UserList";
 import UserForm from "./components/UserForm";
-import UserPhoto from "./components/UserPhoto";
+// import UserPhoto from "./components/UserPhoto";
+import Usersform from "./components/UsersForm";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -20,7 +21,8 @@ function App() {
         {/* <UserList />
         <UserForm /> */}
         {/* <UserList /> */}
-        <UserPhoto />
+        {/* <UserPhoto /> */}
+        <Usersform />
       </div>
     </div>
   );
