@@ -137,12 +137,10 @@
 //   );
 // }
 
-import { useEffect, useState } from "react";
-import ReusableInputField from "./ReusableInputField";
-
+import { useState, useEffect } from "react";
+import InputField from "./InputField";
 
 export default function RegistrationForm() {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -152,18 +150,36 @@ export default function RegistrationForm() {
   });
 
   const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false);
+  // const [isFormValid, setIsFormValid] = useState(false);
 
   // Load data from localStorage on component mount
-  useEffect(()=> {
-    const savedData = JSON.parse(localStorage.getItem("userformData"));
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("userFormData"));
     if (savedData) setFormData(savedData);
   }, []);
 
   // Save data to localStorage when formData changes
   useEffect(() => {
-    localStorage.setItem("useFormData", JSON.stringify(formData));
+    localStorage.setItem("userFormData", JSON.stringify(formData));
   }, [formData]);
+
+  // Form Validation
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (formData.name.length < 3)
+      newErrors.name = "Name must be at least 3 characters.";
+    if (!formData.email.includes("@") || !formData.email.includes(".com"))
+      newErrors.email = "Invalid email format.";
+    if (formData.age <= 0 || formData.age === "")
+      newErrors.age = "Enter a valid age.";
+    if (!formData.gender) newErrors.gender = "Select your gender.";
+    if (!formData.termsAccepted)
+      newErrors.termsAccepted = "You must accept the terms.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   // Handle Input Changes
   const handleChange = (e) => {
@@ -174,48 +190,62 @@ export default function RegistrationForm() {
     });
   };
 
- // Form Validation
-  const validateForm = () => {
-    let newErrors = {};
-
-    if (formData.name.length < 3) newErrors.name = "Name must be at least 3 characters.";
-    if (!formData.email.includes("@") || !formData.email.includes(".com"))
-      newErrors.email = "Invalid email format.";
-    if (formData.age <= 0 || formData.age === "") newErrors.age = "Enter a valid age.";
-    if (!formData.gender) newErrors.gender = "Select your gender.";
-    if (!formData.termsAccepted) newErrors.termsAccepted = "You must accept the terms.";
-
-    setErrors(newErrors);
-    setIsFormValid(Object.keys(newErrors).length === 0);
-  };
-
   // Handle Form Submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateForm();
-    if (isFormValid) {
-      alert("Registration Successful! 🎉\n" + JSON.stringify(formData, null, 2));
-      setFormData({ name: "", email: "", age: "", gender: "", termsAccepted: false }); // Reset form
+
+    if (validateForm()) {
+      alert(
+        "Registration Successful! 🎉\n" + JSON.stringify(formData, null, 2)
+      );
+      setFormData({
+        name: "",
+        email: "",
+        age: "",
+        gender: "",
+        termsAccepted: false,
+      });
       setErrors({});
-      localStorage.removeItem("useFormData"); // Clear localStorage
+      localStorage.removeItem("userFormData"); // Clear stored data
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-blue shadow-lg rounded-lg">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4">User Registration</h2>
       <form onSubmit={handleSubmit}>
-        {/* Reusable InputField Components */}
-        <ReusableInputField type="text" name="name" value={formData.name} onChange={handleChange} label="Name" />
+        {/* Name Field */}
+        <InputField
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          label="Name"
+        />
         {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
 
-        <ReusableInputField type="email" name="email" value={formData.email} onChange={handleChange} label="Email" />
+        {/* Email Field */}
+        <InputField
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          label="Email"
+        />
         {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
-        <ReusableInputField type="number" name="age" value={formData.age} onChange={handleChange} label="Age" />
+        {/* Age Field */}
+        <InputField
+          type="number"
+          name="age"
+          value={formData.age}
+          onChange={handleChange}
+          label="Age"
+        />
         {errors.age && <p className="text-red-500 text-sm">{errors.age}</p>}
 
-        <ReusableInputField
+        {/* Gender Field */}
+        <InputField
           type="radio"
           name="gender"
           value={formData.gender}
@@ -223,22 +253,27 @@ export default function RegistrationForm() {
           label="Gender"
           options={["Male", "Female"]}
         />
-        {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
+        {errors.gender && (
+          <p className="text-red-500 text-sm">{errors.gender}</p>
+        )}
 
-        <ReusableInputField
+        {/* Terms & Conditions Checkbox */}
+        <InputField
           type="checkbox"
           name="termsAccepted"
           checked={formData.termsAccepted}
           onChange={handleChange}
           label="I accept the terms & conditions"
         />
-        {errors.termsAccepted && <p className="text-red-500 text-sm">{errors.termsAccepted}</p>}
+        {errors.termsAccepted && (
+          <p className="text-red-500 text-sm">{errors.termsAccepted}</p>
+        )}
 
         {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
-          disabled={!isFormValid}  // Disable button if form is not valid
+          disabled={errors.length > 0}
         >
           Register
         </button>
@@ -246,4 +281,3 @@ export default function RegistrationForm() {
     </div>
   );
 }
-
