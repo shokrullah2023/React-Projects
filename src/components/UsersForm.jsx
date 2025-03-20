@@ -137,31 +137,34 @@
 //   );
 // }
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserContext";
 import InputField from "./InputField";
 
 export default function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    age: "",
-    gender: "",
-    termsAccepted: false,
-  });
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   age: "",
+  //   gender: "",
+  //   termsAccepted: false,
+  // });
+
+  const [formData, setFormData] = useContext(UserContext);
 
   const [errors, setErrors] = useState({});
   // const [isFormValid, setIsFormValid] = useState(false);
 
-  // Load data from localStorage on component mount
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("userFormData"));
-    if (savedData) setFormData(savedData);
-  }, []);
+  // // Load data from localStorage on component mount
+  // useEffect(() => {
+  //   const savedData = JSON.parse(localStorage.getItem("userFormData"));
+  //   if (savedData) setFormData(savedData);
+  // }, []);
 
-  // Save data to localStorage when formData changes
-  useEffect(() => {
-    localStorage.setItem("userFormData", JSON.stringify(formData));
-  }, [formData]);
+  // // Save data to localStorage when formData changes
+  // useEffect(() => {
+  //   localStorage.setItem("userFormData", JSON.stringify(formData));
+  // }, [formData]);
 
   // Form Validation
   const validateForm = () => {
@@ -198,15 +201,15 @@ export default function RegistrationForm() {
       alert(
         "Registration Successful! 🎉\n" + JSON.stringify(formData, null, 2)
       );
-      setFormData({
-        name: "",
-        email: "",
-        age: "",
-        gender: "",
-        termsAccepted: false,
-      });
-      setErrors({});
-      localStorage.removeItem("userFormData"); // Clear stored data
+      // setFormData({
+      //   name: "",
+      //   email: "",
+      //   age: "",
+      //   gender: "",
+      //   termsAccepted: false,
+      // });
+      // setErrors({});
+      // localStorage.removeItem("userFormData"); // Clear stored data
     }
   };
 

@@ -6,6 +6,7 @@ import UserList from "./components/UserList";
 import UserForm from "./components/UserForm";
 // import UserPhoto from "./components/UserPhoto";
 import Usersform from "./components/UsersForm";
+import { UserContext, UserProvider } from "./components/UserContext";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -22,7 +23,12 @@ function App() {
         <UserForm /> */}
         {/* <UserList /> */}
         {/* <UserPhoto /> */}
-        <Usersform />
+        {/* <Usersform /> */}
+        <UserProvider>
+          <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+            <UserForm />
+          </div>
+        </UserProvider>
       </div>
     </div>
   );
