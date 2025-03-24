@@ -18,16 +18,10 @@ function InputField({ type, name, value, label, onChange, options, checked }) {
             {option}
           </label>
         ))
+      ): type === "checkbox" ? (
+        <input type="checkbox" name={name} checked={checked} onChange={onChange} />
       ) : (
-        /* Handle All other Input Types */
-        <input
-          type={type}
-          name={name}
-          value={type === "checkbox" ? undefined : value}
-          checked={type === "checkbox" ? checked : undefined}
-          onChange={onChange}
-          className="border p-2 w-full rounded"
-        />
+        <input type={type} name={name} value={value} onChange={onchange} className="w-full p-2 border rounded"/>
       )}
     </div>
   );
