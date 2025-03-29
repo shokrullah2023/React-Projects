@@ -150,7 +150,7 @@ export default function RegistrationForm() {
   //   termsAccepted: false,
   // });
 
-  const [formData, setFormData] = useContext(UserContext);
+  const { formData, setFormData } = useContext(UserContext);
 
   const [errors, setErrors] = useState({});
   // const [isFormValid, setIsFormValid] = useState(false);
@@ -214,7 +214,7 @@ export default function RegistrationForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-gray-500 shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4">User Registration</h2>
       <form onSubmit={handleSubmit}>
         {/* Name Field */}

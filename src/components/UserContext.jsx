@@ -1,41 +1,44 @@
-import { useState, useEffect, createContext } from "react";
+import { createContext, useState, useEffect } from "react";
 
+// Create UserContext
 export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
+// Context Provider Component
+export function UserProvider({ children }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     age: "",
     gender: "",
-    termAccepted: false,
+    termsAccepted: false,
   });
 
-  // Load saved data from local storage when component mounts
+  // Load saved data from localStorage when the app starts
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("userFormData"));
     if (savedData) setFormData(savedData);
   }, []);
 
-  // Save data to local storage when formData changes
+  // Save data to localStorage whenever formData changes
   useEffect(() => {
-    localStorage.setItem("useFormData", JSON.stringify(formData));
+    localStorage.setItem("userFormData", JSON.stringify(formData));
   }, [formData]);
 
-  // Clear form data from local storage
-  const clearFormData = () => {
+  // Clear user data function
+  const clearUser = () => {
     setFormData({
       name: "",
       email: "",
       age: "",
       gender: "",
-      termAccepted: false,
+      termsAccepted: false,
     });
+    localStorage.removeItem("userFormData");
   };
 
   return (
-    <UserContext.Provider value={{ formData, setFormData, clearFormData }}>
+    <UserContext.Provider value={{ formData, setFormData, clearUser }}>
       {children}
     </UserContext.Provider>
   );
-};
+}
