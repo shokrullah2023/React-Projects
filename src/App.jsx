@@ -9,6 +9,8 @@
 // import { UserContext, UserProvider } from "./components/StateReusability/UserContext";
 // import UserProfile from "./components/StateReusability/UserProfile";
 
+import ItemList from "./components/ConditionalRendering/ItemList";
+import LoginStatus from "./components/ConditionalRendering/LoginStatus";
 import ToggleMessage from "./components/ConditionalRendering/ToggleMessage";
 
 function App() {
@@ -40,8 +42,10 @@ function App() {
 
 return(
   <div>
-    <div className="card">
+    <div className="flex flex-col items-center gap-6 p-6">
       <ToggleMessage />
+      <LoginStatus />
+      <ItemList />
     </div>
   </div>
 )
