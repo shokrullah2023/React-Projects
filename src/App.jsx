@@ -12,43 +12,46 @@
 import ItemList from "./components/ConditionalRendering/ItemList";
 import LoginStatus from "./components/ConditionalRendering/LoginStatus";
 import ToggleMessage from "./components/ConditionalRendering/ToggleMessage";
+import UserList from "./components/ConditionalRendering/UserList";
+import ManageUser from "./components/ConditionalRendering/MangeUser";
 
 function App() {
   // const [count, setCount] = useState(0);
 
-// Code 1 - 5
-//   return (
-//     <div>
-//       <div className="card">
-//         {/* <PropsPassing />
-//         <Input />
-//         <Counter count={count} setCount={setCount} />
-//         <Counter count={count} setCount={setCount} /> */}
-//         <h1>Welcome to User Directory</h1>
-//         {/* <UserList />
-//         <UserForm /> */}
-//         {/* <UserList /> */}
-//         {/* <UserPhoto /> */}
-//         {/* <Usersform /> */}
-//         <UserProvider>
-//           <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-//             <UserForm />
-//             <UserProfile />
-//           </div>
-//         </UserProvider>
-//       </div>
-//     </div>
-//   );
+  // Code 1 - 5
+  //   return (
+  //     <div>
+  //       <div className="card">
+  //         {/* <PropsPassing />
+  //         <Input />
+  //         <Counter count={count} setCount={setCount} />
+  //         <Counter count={count} setCount={setCount} /> */}
+  //         <h1>Welcome to User Directory</h1>
+  //         {/* <UserList />
+  //         <UserForm /> */}
+  //         {/* <UserList /> */}
+  //         {/* <UserPhoto /> */}
+  //         {/* <Usersform /> */}
+  //         <UserProvider>
+  //           <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+  //             <UserForm />
+  //             <UserProfile />
+  //           </div>
+  //         </UserProvider>
+  //       </div>
+  //     </div>
+  //   );
 
-return(
-  <div>
-    <div className="flex flex-col items-center gap-6 p-6">
-      <ToggleMessage />
+  return (
+    <div>
+      <div className="flex flex-col items-center gap-6 p-6">
+        {/* <ToggleMessage />
       <LoginStatus />
-      <ItemList />
+      <ItemList /> */}
+        <ManageUser />
+      </div>
     </div>
-  </div>
-)
+  );
 }
 
 export default App;
