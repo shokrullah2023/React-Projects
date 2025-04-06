@@ -14,6 +14,7 @@ import LoginStatus from "./components/ConditionalRendering/LoginStatus";
 import ToggleMessage from "./components/ConditionalRendering/ToggleMessage";
 import UserList from "./components/ConditionalRendering/UserList";
 import ManageUser from "./components/ConditionalRendering/MangeUser";
+import QuoteApp from "./components/QuoteApp";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -49,6 +50,7 @@ function App() {
       <LoginStatus />
       <ItemList /> */}
         <ManageUser />
+        <QuoteApp />
       </div>
     </div>
   );
