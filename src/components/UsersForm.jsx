@@ -137,31 +137,34 @@
 //   );
 // }
 
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "./UserContext";
 import InputField from "./InputField";
 
 export default function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    age: "",
-    gender: "",
-    termsAccepted: false,
-  });
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   age: "",
+  //   gender: "",
+  //   termsAccepted: false,
+  // });
+
+  const { formData, setFormData } = useContext(UserContext);
 
   const [errors, setErrors] = useState({});
   // const [isFormValid, setIsFormValid] = useState(false);
 
-  // Load data from localStorage on component mount
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("userFormData"));
-    if (savedData) setFormData(savedData);
-  }, []);
+  // // Load data from localStorage on component mount
+  // useEffect(() => {
+  //   const savedData = JSON.parse(localStorage.getItem("userFormData"));
+  //   if (savedData) setFormData(savedData);
+  // }, []);
 
-  // Save data to localStorage when formData changes
-  useEffect(() => {
-    localStorage.setItem("userFormData", JSON.stringify(formData));
-  }, [formData]);
+  // // Save data to localStorage when formData changes
+  // useEffect(() => {
+  //   localStorage.setItem("userFormData", JSON.stringify(formData));
+  // }, [formData]);
 
   // Form Validation
   const validateForm = () => {
@@ -198,20 +201,20 @@ export default function RegistrationForm() {
       alert(
         "Registration Successful! 🎉\n" + JSON.stringify(formData, null, 2)
       );
-      setFormData({
-        name: "",
-        email: "",
-        age: "",
-        gender: "",
-        termsAccepted: false,
-      });
-      setErrors({});
-      localStorage.removeItem("userFormData"); // Clear stored data
+      // setFormData({
+      //   name: "",
+      //   email: "",
+      //   age: "",
+      //   gender: "",
+      //   termsAccepted: false,
+      // });
+      // setErrors({});
+      // localStorage.removeItem("userFormData"); // Clear stored data
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-gray-500 shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4">User Registration</h2>
       <form onSubmit={handleSubmit}>
         {/* Name Field */}
