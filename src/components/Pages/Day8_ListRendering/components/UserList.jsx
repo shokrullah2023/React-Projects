@@ -1,3 +1,4 @@
+import UserCard from './UserCard';
 
 export default function UserList({ users }) {
 return (

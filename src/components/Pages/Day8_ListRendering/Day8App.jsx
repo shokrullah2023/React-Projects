@@ -1,7 +1,7 @@
 import SearchBar from "./components/SearchBar";
-import SortControl from "./SortControl";
-import UserList from "./UserList";
-import mockUsers from "./mockUsers";
+import SortControl from "./components/SortControl";
+import UserList from "./components/UserList";
+import mockUsers from "./data/mockUsers";
 import { useState } from "react";
 
 
@@ -19,15 +19,14 @@ export default function Day8App() {
             if( sortBy === "name") return a.name.localCompare(b.name);
             if( sortBy === "age") return a.age - b.age;
             return 0;
-})
+        })
 
-return
-(
-    <div className="max-w-2xl mx-auto p-4">
-        <h1>Dynamic User List</h1>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSerachTerm} />
-        <SortControl sortBy={sortBy} setSortBy={setSortBy} />
-        <UserList users={filteredUsers} />
-    </div>
-);
+    return(
+        <div className="max-w-2xl mx-auto p-4">
+            <h1>Dynamic User List</h1>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSerachTerm} />
+            <SortControl sortBy={sortBy} setSortBy={setSortBy} />
+            <UserList users={filteredUsers} />
+        </div>
+    );
 }
