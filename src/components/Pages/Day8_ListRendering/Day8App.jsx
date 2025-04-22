@@ -4,29 +4,27 @@ import UserList from "./components/UserList";
 import mockUsers from "./data/mockUsers";
 import { useState } from "react";
 
-
 export default function Day8App() {
+  const [searchTerm, setSerachTerm] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
-    const [searchTerm, setSerachTerm] = useState("");
-    const [sortBy, setSortBy] = useState("");
+  // Search & sort logic
+  const filteredUsers = mockUsers
+    .filter((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "age") return a.age - b.age;
+      return 0;
+    });
 
-    // Search & sort logic
-    const filteredUsers = mockUsers
-        .filter((user) => 
-            user.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .sort((a, b) => {
-            if( sortBy === "name") return a.name.localCompare(b.name);
-            if( sortBy === "age") return a.age - b.age;
-            return 0;
-        })
-
-    return(
-        <div className="max-w-2xl mx-auto p-4">
-            <h1>Dynamic User List</h1>
-            <SearchBar searchTerm={searchTerm} setSearchTerm={setSerachTerm} />
-            <SortControl sortBy={sortBy} setSortBy={setSortBy} />
-            <UserList users={filteredUsers} />
-        </div>
-    );
+  return (
+    <div className="max-w-2xl mx-auto p-4">
+      <h1>Dynamic User List</h1>
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSerachTerm} />
+      <SortControl sortBy={sortBy} setSortBy={setSortBy} />
+      <UserList users={filteredUsers} />
+    </div>
+  );
 }
