@@ -1,30 +1,11 @@
-import React, { useState } from "react";
+import UserCard from './UserCard';
 
-const UserList = () => {
-const [users, setUsers] = useState([
-    { id: 1, name: "Alice", age: 25, gender: "Female"},
-    { id: 2, name: "Bob", age: 30, gender: "Male"},
-    { id: 3, name: "Chalie", age: 22, gender: "Male"},
-    { id:4, name: "Diana", age: 28, gender: "Female"}
-]);
-
-const sortUsers = () => {
-    const sortedUsers = [...users].sort((a, b) => a.name.localeCompare(b.name));
-    setUsers(sortedUsers);
-}
-
+export default function UserList({ users }) {
 return (
-    <div>
-        <button onClick={sortUsers}> Sort Users</button>
-        <ul>
+    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
             {users.map((user) => (
-                <li key={user.id}>
-                    {user.name} ({user.age} - {user.gender})
-                </li>
+                    <UserCard key={user.id} user={user} />
             ))}
-        </ul>
     </div>
 )
 }
-
-export default UserList;

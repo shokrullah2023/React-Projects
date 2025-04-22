@@ -15,6 +15,7 @@ import ToggleMessage from "./components/ConditionalRendering/ToggleMessage";
 import UserList from "./components/ConditionalRendering/UserList";
 import ManageUser from "./components/ConditionalRendering/MangeUser";
 import QuoteApp from "./components/QuoteApp";
+import Day8App from "./components/Pages/Day8_ListRendering/Day8App";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -49,8 +50,9 @@ function App() {
         {/* <ToggleMessage />
       <LoginStatus />
       <ItemList /> */}
-        <ManageUser />
-        <QuoteApp />
+        {/* <ManageUser />
+        <QuoteApp /> */}
+        <Day8App />
       </div>
     </div>
   );
