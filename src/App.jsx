@@ -16,6 +16,7 @@ import UserList from "./components/ConditionalRendering/UserList";
 import ManageUser from "./components/ConditionalRendering/MangeUser";
 import QuoteApp from "./components/QuoteApp";
 import Day8App from "./components/Pages/Day8_ListRendering/Day8App";
+import Day09UseContextDemo from "./components/Pages/Day9_GlobalStateManagement/Day09UseContextDemo";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -52,7 +53,8 @@ function App() {
       <ItemList /> */}
         {/* <ManageUser />
         <QuoteApp /> */}
-        <Day8App />
+        {/* <Day8App /> */}
+        <Day09UseContextDemo />
       </div>
     </div>
   );
