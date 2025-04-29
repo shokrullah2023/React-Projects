@@ -17,6 +17,7 @@ import ManageUser from "./components/ConditionalRendering/MangeUser";
 import QuoteApp from "./components/QuoteApp";
 import Day8App from "./components/Pages/Day8_ListRendering/Day8App";
 import Day09UseContextDemo from "./components/Pages/Day9_GlobalStateManagement/Day09UseContextDemo";
+import Day10_UseReducerDemo from "./components/Pages/Day10_UseReducer/Day10_UseReducerDemo";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -54,7 +55,9 @@ function App() {
         {/* <ManageUser />
         <QuoteApp /> */}
         {/* <Day8App /> */}
-        <Day09UseContextDemo />
+        {/* <Day09UseContextDemo />
+         */}
+         <Day10_UseReducerDemo />
       </div>
     </div>
   );
