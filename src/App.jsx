@@ -20,6 +20,7 @@ import Day09UseContextDemo from "./components/Pages/Day9_GlobalStateManagement/D
 import Day10_UseReducerDemo from "./components/Pages/Day10_UseReducer/Day10_UseReducerDemo";
 import Day11_ReactRouter from "./components/Pages/Day11_ReactRouter/Day11_ReactRouter";
 import Day12_ControlledUncontrolled from "./components/Pages/Day12_ControlledUncontrolled/Day12_ControlledUncontrolled";
+import QuoteFetcher from "./components/Pages/Day13_CustomHooks/components/QuoteFetcher";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -61,7 +62,8 @@ function App() {
          */}
          {/* <Day10_UseReducerDemo /> */}
          {/* <Day11_ReactRouter /> */}
-         <Day12_ControlledUncontrolled />
+         {/* <Day12_ControlledUncontrolled /> */}
+         <QuoteFetcher />
       </div>
     </div>
   );
