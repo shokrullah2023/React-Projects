@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
-const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"; // Replace with your OpenWeatherMap API key
+const API_KEY = "18983219576d4dec78cccbb3fd108b48"; // Replace with your OpenWeatherMap API key
 
 export default function WeatherResult() {
     const { city } = useParams();

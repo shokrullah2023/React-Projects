@@ -8,7 +8,7 @@ export default function Home() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!city.trim()) return;
-        navigate(`/weather?city=${city}`);
+        navigate(`/weather/${city}`);
     }
 
     return (
